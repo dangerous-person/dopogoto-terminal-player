@@ -5,9 +5,9 @@
 15 albums. 30+ hours of music.
 Live chat. All in your terminal.
 
-## Install
+## Installation
 
-### AI
+### Ask AI
 
 Paste this into Claude Code, Cursor, or any AI agent with terminal access:
 
