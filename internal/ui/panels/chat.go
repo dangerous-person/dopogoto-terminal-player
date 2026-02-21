@@ -28,6 +28,14 @@ func (c *Chat) SetMessages(msgs []chat.Message) {
 	c.scroll = 0
 }
 
+// AddLocalMessage inserts a local-only message (not sent to server).
+func (c *Chat) AddLocalMessage(name, text string) {
+	c.messages = append(c.messages, chat.Message{
+		Name: name,
+		Text: text,
+	})
+}
+
 // SetOffline marks the chat as offline.
 func (c *Chat) SetOffline(offline bool) {
 	c.offline = offline
@@ -242,10 +250,17 @@ func (c Chat) renderMessages(maxW int) []string {
 
 		name := chat.Sanitize(msg.Name)
 		isSystem := name == "[system]"
+		isUpdate := name == "[update]"
 		if isSystem {
 			name = "(◕‿◕)"
 			nameColor = t.TextDim
 			textColor = t.TextDim
+		}
+		if isUpdate {
+			name = "(◕‿◕)"
+			nameColor = t.SelectionBg
+			textColor = t.SelectionBg
+			isSystem = true // use system message formatting
 		}
 		// Clamp name to 16 runes so a long remote name can't push text off-screen
 		if nameRunes := []rune(name); len(nameRunes) > 16 {

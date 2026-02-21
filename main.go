@@ -24,7 +24,7 @@ func main() {
 		}
 	}
 
-	app := ui.NewApp()
+	app := ui.NewApp(version)
 
 	p := tea.NewProgram(
 		app,

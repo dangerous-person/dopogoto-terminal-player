@@ -1,9 +1,12 @@
 package ui
 
 import (
+	"context"
 	"fmt"
+	"io"
 	"log"
 	"math/rand"
+	"net/http"
 	"strings"
 	"time"
 
@@ -16,6 +19,11 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 )
+
+// updateAvailableMsg is sent when a newer version is found on GitHub.
+type updateAvailableMsg struct {
+	Version string
+}
 
 // tickMsg drives animation at ~30fps
 type tickMsg time.Time
@@ -55,15 +63,17 @@ type App struct {
 	currentAlbumIdx int
 	currentTrackIdx int
 
+	version string
+
 	// Too-small screen video
-	tsDec      *video.Decoder
+	tsDec *video.Decoder
 	tsRen      *video.Renderer
 	tsFrame    int
 	tsAccum    float64
 	tsFrameDur float64
 }
 
-func NewApp() *App {
+func NewApp(version string) *App {
 	vid, err := panels.NewVideo(assets.Video001BR, assets.Video002BR, assets.Video003BR, assets.Video004BR, assets.Video005BR, assets.Video006BR, assets.Video007BR, assets.Video008BR, assets.Video009BR, assets.Video010BR, assets.Video011BR, assets.Video012BR, assets.Video013BR, assets.Video014BR, assets.Video015BR)
 	if err != nil {
 		log.Printf("video init: %v", err)
@@ -86,6 +96,7 @@ func NewApp() *App {
 		chatClient:      chat.NewClient(),
 		nickname:        cfg.Nickname,
 		focus:           focusAlbums,
+		version:         version,
 		currentAlbumIdx: -1,
 		currentTrackIdx: -1,
 	}
@@ -122,11 +133,53 @@ func (a *App) SetProgram(p *tea.Program) {
 
 func (a *App) Init() tea.Cmd {
 	a.chatClient.Start()
-	return tickCmd()
+	return tea.Batch(tickCmd(), a.checkForUpdate())
+}
+
+func (a *App) checkForUpdate() tea.Cmd {
+	if a.version == "dev" || a.version == "" {
+		return nil
+	}
+	return func() tea.Msg {
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		req, err := http.NewRequestWithContext(ctx, "GET",
+			"https://api.github.com/repos/dangerous-person/dopogoto/releases/latest", nil)
+		if err != nil {
+			return nil
+		}
+		resp, err := http.DefaultClient.Do(req)
+		if err != nil || resp.StatusCode != 200 {
+			return nil
+		}
+		defer resp.Body.Close()
+		body, _ := io.ReadAll(io.LimitReader(resp.Body, 4096))
+		// Quick parse for "tag_name" without importing encoding/json
+		const key = `"tag_name":"`
+		idx := strings.Index(string(body), key)
+		if idx < 0 {
+			return nil
+		}
+		start := idx + len(key)
+		end := strings.Index(string(body[start:]), `"`)
+		if end < 0 {
+			return nil
+		}
+		latest := string(body[start : start+end])
+		if latest != a.version && latest > a.version {
+			return updateAvailableMsg{Version: latest}
+		}
+		return nil
+	}
 }
 
 func (a *App) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	switch msg := msg.(type) {
+
+	case updateAvailableMsg:
+		a.chat.AddLocalMessage("[update]",
+			msg.Version+" available — curl -fsSL .../install.sh | sh")
+		return a, nil
 
 	case tickMsg:
 		a.video.Tick(33)
