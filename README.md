@@ -76,7 +76,7 @@ Type a message and press Enter.
 ## Licensing
 
 - Source code is licensed under MIT (see `LICENSE`).
-- Media/assets are licensed separately (see `ASSETS_LICENSE.md`) and are not covered by MIT.
+- Media/assets are licensed separately (see [ASSETS_LICENSE.md](ASSETS_LICENSE.md)) and are not covered by MIT.
 
 ## Links
 - https://www.youtube.com/@dopogoto
