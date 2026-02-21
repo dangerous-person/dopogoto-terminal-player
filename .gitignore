@@ -1,0 +1,27 @@
+# Compiled binaries
+dopogoto
+dopogoto-v02.exe
+dopogoto.exe
+*.exe
+
+# macOS
+.DS_Store
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Go test/build
+*.test
+*.out
+
+# Tooling
+CLAUDE.md
+.claude/
+.playwright-mcp/
+
+# Screenshots
+*.png
+*.jpeg

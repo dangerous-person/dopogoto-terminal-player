@@ -1,0 +1,19 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25"
+      - run: gofmt -l . | grep . && exit 1 || true
+      - run: go vet ./...
+      - run: go test ./...
+      - run: go test -race ./...
+      - run: go build .
