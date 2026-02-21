@@ -676,7 +676,7 @@ func (a *App) renderHelpBar() string {
 		key("TAB", fmt.Sprintf("\x1b[38;5;%smSWITCH", lb)),
 		key("ENTER", fmt.Sprintf("\x1b[38;5;%smPLAY", lb)),
 		key("SPACE", a.pauseLabel()),
-		key("←/→", fmt.Sprintf("\x1b[38;5;%smSEEK", lb)),
+		fmt.Sprintf("\x1b[38;5;%sm[\x1b[38;5;%sm←\x1b[38;5;%sm/\x1b[38;5;%sm→\x1b[38;5;%sm] \x1b[38;5;%smSEEK\x1b[0m", br, ky, br, ky, br, lb),
 		shuffleStr,
 		repeatStr,
 	}, "  ")
