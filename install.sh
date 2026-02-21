@@ -24,10 +24,10 @@ case "$ARCH" in
     ;;
 esac
 
-# Get latest release tag
+# Get latest release tag (via redirect, avoids API rate limits)
 echo "Finding latest release..."
-TAG=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" \
-  | sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p')
+TAG=$(curl -sIo /dev/null -w "%{redirect_url}" "https://github.com/${REPO}/releases/latest" \
+  | sed 's|.*/tag/||')
 
 if [ -z "$TAG" ]; then
   echo "Error: could not find latest release"; exit 1
