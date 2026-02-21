@@ -13,30 +13,23 @@ Paste this into Claude Code, Cursor, or any AI agent with terminal access:
 
 > Install dopogoto terminal music player from github.com/dangerous-person/dopogoto
 
-### Script (macOS & Linux)
+### macOS & Linux
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto/main/install.sh | sh
 ```
 
-This downloads the latest binary, installs it to `/usr/local/bin`, and removes the macOS quarantine attribute automatically.
+Or download manually from [Releases](https://github.com/dangerous-person/dopogoto/releases).
 
-### Download from GitHub Releases
-
-Grab the latest archive from the [Releases page](https://github.com/dangerous-person/dopogoto/releases) and extract it:
-
-```sh
-tar -xzf dopogoto_*.tar.gz
-dopogoto
-```
-
-**macOS Gatekeeper note:** Since the binary isn't code-signed, macOS will block it. Remove the quarantine attribute after extracting:
+**macOS Gatekeeper:** If macOS blocks the binary, remove the quarantine attribute:
 
 ```sh
 xattr -d com.apple.quarantine dopogoto
 ```
 
-Or: System Settings → Privacy & Security → scroll down → click "Allow Anyway".
+### Windows
+
+Download `dopogoto_*_windows_amd64.zip` from [Releases](https://github.com/dangerous-person/dopogoto/releases), extract, and run `dopogoto.exe`.
 
 ### Build from source
 
@@ -44,15 +37,6 @@ Requires Go 1.25+:
 
 ```sh
 go install github.com/dangerous-person/dopogoto@latest
-```
-
-Or clone and build:
-
-```sh
-git clone https://github.com/dangerous-person/dopogoto.git
-cd dopogoto
-go build -o dopogoto .
-dopogoto
 ```
 
 ## Requirements
