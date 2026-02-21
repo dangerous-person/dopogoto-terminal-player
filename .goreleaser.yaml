@@ -23,17 +23,6 @@ builds:
       - -s -w
     binary: dopogoto
 
-  - id: dopogoto-linux
-    env:
-      - CGO_ENABLED=0
-    goos:
-      - linux
-    goarch:
-      - amd64
-    ldflags:
-      - -s -w
-    binary: dopogoto
-
   - id: dopogoto-windows
     env:
       - CGO_ENABLED=0
@@ -60,12 +49,6 @@ archives:
     format: tar.gz
     name_template: "dopogoto_{{ .Version }}_darwin_universal"
 
-  - id: linux
-    builds:
-      - dopogoto-linux
-    format: tar.gz
-    name_template: "dopogoto_{{ .Version }}_linux_amd64"
-
   - id: windows
     builds:
       - dopogoto-windows
@@ -74,8 +57,12 @@ archives:
 
 checksum:
   name_template: checksums.txt
+  extra_files:
+    - glob: ./linux-dist/*
 
 release:
+  extra_files:
+    - glob: ./linux-dist/*
   header: |
     ## Install
 

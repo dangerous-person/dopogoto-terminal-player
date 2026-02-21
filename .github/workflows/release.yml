@@ -9,8 +9,38 @@ permissions:
   contents: write
 
 jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Install ALSA headers
+        run: sudo apt-get update && sudo apt-get install -y libasound2-dev
+
+      - name: Build Linux binary
+        env:
+          CGO_ENABLED: "1"
+          GOOS: linux
+          GOARCH: amd64
+        run: go build -ldflags="-s -w" -o dopogoto .
+
+      - name: Create archive
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          tar -czf "dopogoto_${VERSION}_linux_amd64.tar.gz" dopogoto
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux-dist
+          path: dopogoto_*_linux_amd64.tar.gz
+
   release:
     runs-on: macos-latest
+    needs: build-linux
     steps:
       - uses: actions/checkout@v4
         with:
@@ -18,7 +48,12 @@ jobs:
 
       - uses: actions/setup-go@v5
         with:
-          go-version: "1.25"
+          go-version-file: go.mod
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: linux-dist
+          path: linux-dist
 
       - uses: goreleaser/goreleaser-action@v6
         with:
