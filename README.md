@@ -9,7 +9,7 @@ Live chat. All in your terminal.
 
 ### Ask AI
 
-Paste this into Claude Code, Cursor, or any AI agent with terminal access:
+Paste this into Claude Code, Codex, Cursor, or any AI agent with terminal access:
 
 > Install dopogoto terminal music player from github.com/dangerous-person/dopogoto
 
