@@ -7,6 +7,8 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
+	"runtime"
 	"strings"
 	"time"
 
@@ -133,7 +135,24 @@ func (a *App) SetProgram(p *tea.Program) {
 
 func (a *App) Init() tea.Cmd {
 	a.chatClient.Start()
-	return tea.Batch(tickCmd(), a.checkForUpdate())
+	cmds := []tea.Cmd{tickCmd(), a.checkForUpdate()}
+	if os.Getenv("DOPOGOTO_NO_TELEMETRY") == "" {
+		go a.sendTelemetry()
+	}
+	return tea.Batch(cmds...)
+}
+
+func (a *App) sendTelemetry() {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	body := fmt.Sprintf(`{"api_key":"phc_1S0EQGoWYuoCNLBOsBimJbrpWUbveQfafLCmLAxWBhw","event":"app_launched","distinct_id":"dopogoto-terminal","properties":{"version":"%s","os":"%s","arch":"%s"}}`,
+		a.version, runtime.GOOS, runtime.GOARCH)
+	req, err := http.NewRequestWithContext(ctx, "POST", "https://us.i.posthog.com/capture/", strings.NewReader(body))
+	if err != nil {
+		return
+	}
+	req.Header.Set("Content-Type", "application/json")
+	http.DefaultClient.Do(req)
 }
 
 func (a *App) checkForUpdate() tea.Cmd {

@@ -73,6 +73,12 @@ Type a message and press Enter.
 - `/nick name` -- set your nickname (saved locally)
 - `/reset` -- go anonymous
 
+## Telemetry
+
+App sends a single anonymous ping on launch (version, OS) to help us understand usage. No personal info. No IP tracking.
+
+To opt out: `export DOPOGOTO_NO_TELEMETRY=1`
+
 ## Licensing
 
 - Source code is licensed under MIT (see `LICENSE`).
