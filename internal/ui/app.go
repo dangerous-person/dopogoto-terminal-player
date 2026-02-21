@@ -68,7 +68,7 @@ type App struct {
 	version string
 
 	// Too-small screen video
-	tsDec *video.Decoder
+	tsDec      *video.Decoder
 	tsRen      *video.Renderer
 	tsFrame    int
 	tsAccum    float64
