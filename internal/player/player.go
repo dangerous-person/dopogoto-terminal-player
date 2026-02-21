@@ -108,8 +108,8 @@ func (p *Player) PlayURL(rawURL, title string) {
 		// Encode URL (CDN paths may contain spaces)
 		encodedURL := encodeURL(rawURL)
 
-		// Download with 30s timeout, cancellable on next track
-		dlCtx, dlCancel := context.WithTimeout(ctx, 30*time.Second)
+		// Download with 2min timeout, cancellable on next track
+		dlCtx, dlCancel := context.WithTimeout(ctx, 120*time.Second)
 		defer dlCancel()
 
 		req, err := http.NewRequestWithContext(dlCtx, "GET", encodedURL, nil)

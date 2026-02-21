@@ -157,9 +157,8 @@ func (a *App) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		return a, a.playNext()
 
 	case player.ErrorMsg:
-		log.Printf("player error: %v", msg.Err)
 		a.controls.State = panels.StateStopped
-		a.controls.TrackTitle = "Error: " + msg.Err.Error()
+		a.controls.TrackTitle = "Couldn't load — skipping to next"
 		// Auto-skip to next track after error
 		return a, tea.Tick(2*time.Second, func(t time.Time) tea.Msg {
 			return player.TrackEndMsg{}
