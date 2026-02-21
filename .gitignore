@@ -1,5 +1,6 @@
 # GoReleaser output
 dist/
+linux-dist/
 
 # Compiled binaries
 dopogoto
