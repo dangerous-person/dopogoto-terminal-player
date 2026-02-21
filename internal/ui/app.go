@@ -617,7 +617,7 @@ func (a *App) renderHelpBar() string {
 			volStr += fmt.Sprintf("\x1b[38;5;%sm%s", t.UnplayedColor, volChars[i])
 		}
 	}
-	themeKey := fmt.Sprintf("\x1b[38;5;%sm[\x1b[38;5;%smT\x1b[38;5;%sm]", br, ky, br)
+	themeKey := fmt.Sprintf("\x1b[38;5;%sm[\x1b[38;5;%smT\x1b[38;5;%sm] \x1b[38;5;%smTHEME", br, ky, br, lb)
 	volKeys := fmt.Sprintf("\x1b[38;5;%sm[\x1b[38;5;%sm-\x1b[38;5;%sm/\x1b[38;5;%sm+\x1b[38;5;%sm]", br, ky, br, ky, br)
 	right := fmt.Sprintf("%s %s \x1b[0m%s\x1b[0m ", themeKey, volKeys, volStr)
 
@@ -632,10 +632,14 @@ func (a *App) renderHelpBar() string {
 
 func (a *App) pauseLabel() string {
 	t := panels.CurrentTheme()
-	if a.controls.State == panels.StatePaused {
-		return fmt.Sprintf("\x1b[38;5;%smRESUME", t.TextColor)
+	lb := t.HelpLabel
+	if lb == "" {
+		lb = t.TextColor
 	}
-	return fmt.Sprintf("\x1b[38;5;%smPAUSE", t.TextColor)
+	if a.controls.State == panels.StatePaused {
+		return fmt.Sprintf("\x1b[38;5;%smRESUME", lb)
+	}
+	return fmt.Sprintf("\x1b[38;5;%smPAUSE", lb)
 }
 
 func (a *App) tickTooSmallVideo(dtMs float64) {
