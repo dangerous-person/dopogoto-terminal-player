@@ -27,7 +27,7 @@ Grab the latest archive from the [Releases page](https://github.com/dangerous-pe
 
 ```sh
 tar -xzf dopogoto_*.tar.gz
-./dopogoto
+dopogoto
 ```
 
 **macOS Gatekeeper note:** Since the binary isn't code-signed, macOS will block it. Remove the quarantine attribute after extracting:
@@ -52,7 +52,7 @@ Or clone and build:
 git clone https://github.com/dangerous-person/dopogoto.git
 cd dopogoto
 go build -o dopogoto .
-./dopogoto
+dopogoto
 ```
 
 ## Requirements
