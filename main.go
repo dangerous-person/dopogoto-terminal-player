@@ -9,7 +9,21 @@ import (
 	"github.com/dangerous-person/dopogoto/internal/ui"
 )
 
+var version = "dev"
+
 func main() {
+	if len(os.Args) > 1 {
+		switch os.Args[1] {
+		case "--version", "-v":
+			fmt.Printf("dopogoto %s\n", version)
+			return
+		case "--help", "-h":
+			fmt.Println("Dopo Goto — terminal music and video player")
+			fmt.Println("https://github.com/dangerous-person/dopogoto")
+			return
+		}
+	}
+
 	app := ui.NewApp()
 
 	p := tea.NewProgram(

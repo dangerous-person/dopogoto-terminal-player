@@ -11,7 +11,7 @@ builds:
     goarch:
       - arm64
     ldflags:
-      - -s -w
+      - -s -w -X main.version=v{{ .Version }}
     binary: dopogoto
 
   - id: dopogoto-darwin-amd64
@@ -22,7 +22,7 @@ builds:
     goarch:
       - amd64
     ldflags:
-      - -s -w
+      - -s -w -X main.version=v{{ .Version }}
     binary: dopogoto
 
   - id: dopogoto-windows
@@ -33,7 +33,7 @@ builds:
     goarch:
       - amd64
     ldflags:
-      - -s -w
+      - -s -w -X main.version=v{{ .Version }}
     binary: dopogoto
 
 universal_binaries:
