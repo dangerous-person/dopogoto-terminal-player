@@ -1,3 +1,6 @@
+# GoReleaser output
+dist/
+
 # Compiled binaries
 dopogoto
 dopogoto-v02.exe

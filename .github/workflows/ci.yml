@@ -8,13 +8,29 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo apt-get update && sudo apt-get install -y libasound2-dev
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
         with:
-          go-version: "1.25"
-      - run: gofmt -l . | grep . && exit 1 || true
-      - run: go vet ./...
-      - run: go test ./...
-      - run: go test -race ./...
-      - run: go build .
+          go-version-file: go.mod
+      - name: Install audio build deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libasound2-dev pkg-config
+      - name: Check formatting
+        run: |
+          unformatted="$(gofmt -l .)"
+          if [ -n "$unformatted" ]; then
+            echo "Unformatted files:"
+            echo "$unformatted"
+            exit 1
+          fi
+      - name: Vet
+        run: go vet ./...
+      - name: Test
+        run: go test ./...
+      - name: Race test
+        env:
+          CGO_ENABLED: "1"
+        run: go test -race ./...
+      - name: Build
+        run: go build .

@@ -1,0 +1,86 @@
+project_name: dopogoto
+
+builds:
+  - id: dopogoto-darwin-arm64
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+    goarch:
+      - arm64
+    ldflags:
+      - -s -w
+    binary: dopogoto
+
+  - id: dopogoto-darwin-amd64
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+    goarch:
+      - amd64
+    ldflags:
+      - -s -w
+    binary: dopogoto
+
+  - id: dopogoto-linux
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+    ldflags:
+      - -s -w
+    binary: dopogoto
+
+  - id: dopogoto-windows
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
+    goarch:
+      - amd64
+    ldflags:
+      - -s -w
+    binary: dopogoto
+
+universal_binaries:
+  - id: dopogoto-darwin-universal
+    ids:
+      - dopogoto-darwin-arm64
+      - dopogoto-darwin-amd64
+    replace: true
+    name_template: dopogoto
+
+archives:
+  - id: macos
+    builds:
+      - dopogoto-darwin-universal
+    format: tar.gz
+    name_template: "dopogoto_{{ .Version }}_darwin_universal"
+
+  - id: linux
+    builds:
+      - dopogoto-linux
+    format: tar.gz
+    name_template: "dopogoto_{{ .Version }}_linux_amd64"
+
+  - id: windows
+    builds:
+      - dopogoto-windows
+    format: zip
+    name_template: "dopogoto_{{ .Version }}_windows_amd64"
+
+checksum:
+  name_template: checksums.txt
+
+release:
+  header: |
+    ## Install
+
+    ```sh
+    curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto/main/install.sh | sh
+    ```
+
+    Or download an archive below and extract it manually.
