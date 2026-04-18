@@ -1,6 +1,6 @@
 # Dopo Goto
 
-Dopo Goto is a terminal-native audiovisual experience.<br>
+Terminal-native player.<br>
 15 albums. 30+ hours of music. Live chat.<br>
 All in your command line.
 
