@@ -6,7 +6,7 @@ import (
 
 	tea "github.com/charmbracelet/bubbletea"
 
-	"github.com/dangerous-person/dopogoto/internal/ui"
+	"github.com/dangerous-person/dopogoto-terminal-player/internal/ui"
 )
 
 var version = "dev"
@@ -19,7 +19,7 @@ func main() {
 			return
 		case "--help", "-h":
 			fmt.Println("Dopo Goto — terminal music and video player")
-			fmt.Println("https://github.com/dangerous-person/dopogoto")
+			fmt.Println("https://github.com/dangerous-person/dopogoto-terminal-player")
 			return
 		}
 	}

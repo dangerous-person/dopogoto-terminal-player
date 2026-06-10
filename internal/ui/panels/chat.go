@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/dangerous-person/dopogoto/internal/chat"
+	"github.com/dangerous-person/dopogoto-terminal-player/internal/chat"
 )
 
 // localMsg is a local-only message anchored to a position in the remote stream.

@@ -69,7 +69,7 @@ release:
     ## Install
 
     ```sh
-    curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto/main/install.sh | sh
+    curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto-terminal-player/main/install.sh | sh
     ```
 
     Or download an archive below and extract it manually.

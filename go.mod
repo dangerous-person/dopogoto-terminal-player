@@ -1,4 +1,4 @@
-module github.com/dangerous-person/dopogoto
+module github.com/dangerous-person/dopogoto-terminal-player
 
 go 1.25.0
 

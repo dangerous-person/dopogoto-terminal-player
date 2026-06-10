@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"strings"
 
-	"github.com/dangerous-person/dopogoto/internal/video"
+	"github.com/dangerous-person/dopogoto-terminal-player/internal/video"
 )
 
 // Video is a bubbletea component that plays looping ASCII videos in random order.

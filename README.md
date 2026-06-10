@@ -24,7 +24,7 @@ Paste this into Claude Code, Codex, Cursor, or any AI agent with terminal access
 2. Paste this command and press Enter:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto-terminal-player/main/install.sh | sh
 ```
 
 3. If prompted, type your Mac password to allow install to `/usr/local/bin`.<br>
@@ -39,7 +39,7 @@ If Terminal says `command not found`, close Terminal, reopen it, and try `dopogo
 
 ### macOS (manual install, if the command above doesn't work)
 
-1. Go to [Releases](https://github.com/dangerous-person/dopogoto/releases) and download the latest macOS file:
+1. Go to [Releases](https://github.com/dangerous-person/dopogoto-terminal-player/releases) and download the latest macOS file:
    `dopogoto_*_darwin_universal.tar.gz`
    (`darwin` means macOS, `universal` means it works on both Intel and Apple Silicon Macs).
 2. Open Downloads in Finder and double-click the `.tar.gz` file.
@@ -63,12 +63,12 @@ sudo mv ~/Downloads/dopogoto_0.1.8_darwin_universal/dopogoto /usr/local/bin/dopo
 
 ### Windows
 
-1. Download `dopogoto_*_windows_amd64.zip` from [Releases](https://github.com/dangerous-person/dopogoto/releases)
+1. Download `dopogoto_*_windows_amd64.zip` from [Releases](https://github.com/dangerous-person/dopogoto-terminal-player/releases)
 2. Extract, and run `dopogoto.exe`.
 
 ### Linux
 
-1. Download `dopogoto_*_linux_amd64.tar.gz` from [Releases](https://github.com/dangerous-person/dopogoto/releases)
+1. Download `dopogoto_*_linux_amd64.tar.gz` from [Releases](https://github.com/dangerous-person/dopogoto-terminal-player/releases)
 2. Extract and install:
 
 ```sh
@@ -87,15 +87,17 @@ sudo chmod +x /usr/local/bin/dopogoto
 Or use the one-liner:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto-terminal-player/main/install.sh | sh
 ```
 
 ### Build from source
 
-Requires Go 1.25+:
+Requires Go 1.25+ (Linux also needs ALSA headers, see [Requirements](#requirements)):
 
 ```sh
-go install github.com/dangerous-person/dopogoto@latest
+git clone https://github.com/dangerous-person/dopogoto-terminal-player
+cd dopogoto-terminal-player
+go build -o dopogoto .
 ```
 
 ## Requirements
@@ -120,7 +122,7 @@ The app checks for updates on launch and shows a notification in chat when a new
 3. Paste this command and press Enter (you can run it from any folder):
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto-terminal-player/main/install.sh | sh
 ```
 
 4. If prompted, type your Mac password and press Enter.
@@ -131,7 +133,7 @@ curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto/main/inst
 
 1. Close dopogoto.
 2. Delete your old `dopogoto.exe` file.
-3. Go to [Releases](https://github.com/dangerous-person/dopogoto/releases) and download the latest `dopogoto_*_windows_amd64.zip`.
+3. Go to [Releases](https://github.com/dangerous-person/dopogoto-terminal-player/releases) and download the latest `dopogoto_*_windows_amd64.zip`.
 4. Extract the ZIP and run the new `dopogoto.exe`.
 
 ### Linux
@@ -139,7 +141,7 @@ curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto/main/inst
 Quit dopogoto, then run:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/dangerous-person/dopogoto-terminal-player/main/install.sh | sh
 ```
 
 Then run `dopogoto` again.

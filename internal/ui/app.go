@@ -13,12 +13,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dangerous-person/dopogoto/assets"
-	"github.com/dangerous-person/dopogoto/internal/chat"
-	"github.com/dangerous-person/dopogoto/internal/data"
-	"github.com/dangerous-person/dopogoto/internal/player"
-	"github.com/dangerous-person/dopogoto/internal/ui/panels"
-	"github.com/dangerous-person/dopogoto/internal/video"
+	"github.com/dangerous-person/dopogoto-terminal-player/assets"
+	"github.com/dangerous-person/dopogoto-terminal-player/internal/chat"
+	"github.com/dangerous-person/dopogoto-terminal-player/internal/data"
+	"github.com/dangerous-person/dopogoto-terminal-player/internal/player"
+	"github.com/dangerous-person/dopogoto-terminal-player/internal/ui/panels"
+	"github.com/dangerous-person/dopogoto-terminal-player/internal/video"
 
 	tea "github.com/charmbracelet/bubbletea"
 )
@@ -189,7 +189,7 @@ func (a *App) showUpdateIfReady() {
 	a.chat.AddLocalMessage("[update]",
 		"New version "+a.updateVersion+" is available.")
 	a.chat.AddLocalMessage("[update]",
-		"Update instructions: https://github.com/dangerous-person/dopogoto#updating")
+		"Update instructions: https://github.com/dangerous-person/dopogoto-terminal-player#updating")
 }
 
 func (a *App) checkForUpdate() tea.Cmd {
@@ -200,7 +200,7 @@ func (a *App) checkForUpdate() tea.Cmd {
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 		req, err := http.NewRequestWithContext(ctx, "GET",
-			"https://api.github.com/repos/dangerous-person/dopogoto/releases/latest", nil)
+			"https://api.github.com/repos/dangerous-person/dopogoto-terminal-player/releases/latest", nil)
 		if err != nil {
 			return nil
 		}

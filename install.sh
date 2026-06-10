@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-REPO="dangerous-person/dopogoto"
+REPO="dangerous-person/dopogoto-terminal-player"
 BINARY="dopogoto"
 
 # Detect OS and architecture

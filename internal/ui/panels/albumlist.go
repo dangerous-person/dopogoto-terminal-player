@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/dangerous-person/dopogoto/internal/data"
+	"github.com/dangerous-person/dopogoto-terminal-player/internal/data"
 )
 
 type AlbumList struct {

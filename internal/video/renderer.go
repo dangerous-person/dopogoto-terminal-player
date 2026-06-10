@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/dangerous-person/dopogoto/internal/theme"
+	"github.com/dangerous-person/dopogoto-terminal-player/internal/theme"
 )
 
 // Render modes.
