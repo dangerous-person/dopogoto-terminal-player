@@ -16,7 +16,7 @@ Already installed? See [Updating](#updating).
 
 Paste this into Claude Code, Codex, Cursor, or any AI agent with terminal access:
 
-> Install dopogoto terminal music player from github.com/dangerous-person/dopogoto
+> Install dopogoto terminal music player from github.com/dangerous-person/dopogoto-terminal-player
 
 ### macOS
 
